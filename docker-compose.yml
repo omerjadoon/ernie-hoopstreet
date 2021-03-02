@@ -26,3 +26,16 @@ services:
       MYSQL_USERNAME: root
       MYSQL_ROOT_PASSWORD: admin
       PMA_ARBITRARY: 1
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    volumes: 
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+    ports:
+      - "9000:9000"
+    networks:
+      - laravel
