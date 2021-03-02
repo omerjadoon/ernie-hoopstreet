@@ -1,0 +1,20 @@
+# Use the PHP 7.3 runtime (BETA) by replacing "php72" below with "php73"
+runtime: php72
+
+env_variables:
+  ## Put production environment variables here.
+  APP_KEY: base64:oKb8hAUKNq6pS/BUT4qFCFm13OncmX2Ig6+2WRNyphw=
+  APP_STORAGE: /tmp
+  VIEW_COMPILED_PATH: /tmp
+  CACHE_DRIVER: database
+  SESSION_DRIVER: database
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_DATABASE: lararole
+  DB_USERNAME: hoopstreetapp
+  DB_PASSWORD: hoopstreet123
+  DB_SOCKET: "/cloudsql/beamologywebsite:us-central1:hoopstreetapp"
+
+  ## To use Stackdriver logging in your Laravel application, copy
+  ## "app/Logging/CreateStackdriverLogger.php" and "config/logging.php"
+  ## into your Laravel application. Then uncomment the following line:
+  # LOG_CHANNEL: stackdriver

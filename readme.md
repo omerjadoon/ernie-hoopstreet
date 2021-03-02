@@ -1,7 +1,27 @@
-## Investment Project in PHP Laravel
+## Create folders
 
+```
+#!terminal
 
-### Run on Google cloud run
+cp .env.example .env && mkdir bootstrap/cache storage storage/framework && cd storage/framework && mkdir sessions views cache
 
-[![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/omerjadoon/ernie-hoopstreet.git)
-..
+```
+
+## Folder permissions
+
+```
+#!terminal
+
+sudo chown :www-data app storage bootstrap -R
+sudo chmod 775 app storage bootstrap -R
+
+```
+
+## Install dependencies
+
+```
+#!terminal
+
+composer install
+
+```

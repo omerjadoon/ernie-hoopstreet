@@ -1,0 +1,32 @@
+# Use the PHP 7.3 runtime (BETA) by replacing "php72" below with "php73"
+runtime: php74
+
+
+handlers:
+- url: /(.*\.(gif|png|jpg|css|js))$
+  static_files: public/\1
+  upload: public/.*\.(gif|png|jpg|css|js)$
+
+- url: /.*
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
+
+
+env_variables:
+  APP_KEY: base64:oKb8hAUKNq6pS/BUT4qFCFm13OncmX2Ig6+2WRNyphw=
+  APP_STORAGE: /tmp
+  CACHE_DRIVER: database
+  SESSION_DRIVER: database
+  DB_DATABASE: lararole
+  DB_USERNAME: hoopstreetapp
+  DB_PASSWORD: hoopstreet123
+  DB_SOCKET: "/cloudsql/beamologywebsite:us-central1:hoopstreetapp"
+  APP_SERVICES_CACHE: /tmp/services.php
+  APP_PACKAGES_CACHE: /tmp/packages.php
+  APP_CONFIG_CACHE: /tmp/config.php
+  APP_ROUTES_CACHE: /tmp/routes.php
+  ## To use Stackdriver logging in your Laravel application, copy
+  ## "app/Logging/CreateStackdriverLogger.php" and "config/logging.php"
+  ## into your Laravel application. Then uncomment the following line:
+  # LOG_CHANNEL: stackdriver
