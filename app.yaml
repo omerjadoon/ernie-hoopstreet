@@ -16,6 +16,7 @@ handlers:
 env_variables:
   APP_KEY: base64:oKb8hAUKNq6pS/BUT4qFCFm13OncmX2Ig6+2WRNyphw=
   APP_STORAGE: /tmp
+  VIEW_COMPILED_PATH: /tmp
   CACHE_DRIVER: database
   SESSION_DRIVER: database
   DB_DATABASE: lararole

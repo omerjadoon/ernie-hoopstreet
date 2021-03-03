@@ -17,7 +17,7 @@ class CreateUserDividentTable extends Migration
             $table->bigIncrements('id');
             $table->string('divident_recieved');
             $table->string('user_id');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

@@ -37,7 +37,6 @@
     "scripts": {
         
         "post-autoload-dump": [
-            "mkdir -p ./bootstrap/cache/",
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
@@ -49,7 +48,13 @@
         ],
         "post-install-cmd": [
             "chmod -R 777 ./bootstrap/cache",
-            "chmod -R 777 ./storage",
+            "chown -R www-data ./bootstrap",
+            "chmod -R 777 ./storage/framework",
+            "chown -R www-data ./storage",
+            "cd storage/",
+            "mkdir -p framework/{sessions,views,cache}",
+            "chmod -R 777 framework",
+            "chown -R www-data:www-data framework",
            "php artisan cache:clear",
            "php artisan config:clear",
            "php artisan view:clear",

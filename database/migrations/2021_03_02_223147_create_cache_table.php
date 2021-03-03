@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSharesTable extends Migration
+class CreateCacheTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSharesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shares', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('share_id');
-            $table->string('user_email');
-            $table->string('user_id');
-            $table->timestamps();
+        Schema::create('cache', function (Blueprint $table) {
+            $table->string('key')->unique();
+            $table->mediumText('value');
+            $table->integer('expiration');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateSharesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shares');
+        Schema::dropIfExists('cache');
     }
 }

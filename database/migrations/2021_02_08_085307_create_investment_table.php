@@ -21,7 +21,7 @@ class CreateInvestmentTable extends Migration
             $table->string('investment_status')->default('0');
             $table->string('payment_source')->nullable();
             $table->integer('user_id');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 
