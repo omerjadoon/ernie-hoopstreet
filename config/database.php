@@ -43,9 +43,10 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '35.238.16.52'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'hoopstreetapp'),
-            'username' => env('DB_USERNAME', 'hoopstreet123'),
-            'password' => env('DB_PASSWORD', 'lararole'),
+            
+            'database' => env('DB_DATABASE', 'lararole'),
+            'username' => env('DB_USERNAME', 'hoopstreetapp'),
+            'password' => env('DB_PASSWORD', 'hoopstreet123'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
