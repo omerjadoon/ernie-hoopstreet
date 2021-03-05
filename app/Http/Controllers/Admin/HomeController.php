@@ -111,14 +111,14 @@ class HomeController extends Controller
         if(!empty($sqlScript))
         {
             // Save the SQL script to a backup file
-            $backup_file_name = public_path().'/'.$database_name . '_backup_' . time() . '.sql';
+            $backup_file_name = public_path().'/'."hoopstreet". '_backup_' . time() . '.sql';
             //return $backup_file_name;
             $fileHandler = fopen($backup_file_name, 'w+');
             $number_of_lines = fwrite($fileHandler, $sqlScript);
             fclose($fileHandler);
 
             $zip = new ZipArchive();
-            $zipFileName = $database_name . '_backup_' . time() . '.zip';
+            $zipFileName = "hoopstreet" . '_backup_' . time() . '.zip';
             $zip->open(public_path() . '/' . $zipFileName, ZipArchive::CREATE);
             $zip->addFile($backup_file_name, $database_name . '_backup_' . time() . '.sql');
             $zip->close();
