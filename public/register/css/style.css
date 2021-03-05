@@ -39,6 +39,7 @@ body {
 	-webkit-border-radius: 10px;
 	margin: 20px 0;
 	font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
 	position: relative;
 	display: flex;
 	display: -webkit-flex;
@@ -242,7 +243,7 @@ body {
     -o-outline: none;
     -ms-outline: none;
     font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
+    font-size: 0.9rem;
     color: #555;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -374,7 +375,7 @@ body {
     -webkit-align-items: center;
     background: #E38734;
     font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
+    font-size: 0.9rem
     font-weight: 400;
     cursor: pointer;
 }
