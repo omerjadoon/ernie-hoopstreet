@@ -38,7 +38,7 @@ body {
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	margin: 20px 0;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	position: relative;
 	display: flex;
 	display: -webkit-flex;
@@ -241,7 +241,7 @@ body {
     -webkit-outline: none;
     -o-outline: none;
     -ms-outline: none;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     color: #555;
     box-sizing: border-box;
@@ -373,7 +373,7 @@ body {
     -moz-align-items: center;
     -webkit-align-items: center;
     background: #E38734;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
     cursor: pointer;
