@@ -15,6 +15,8 @@ use Stripe;
 use Session;
 use PDF;
 use Mail;
+use Validator;
+use App\Jobs\MailJob;
 
 class CustomerInvestmentController extends Controller
 {
@@ -98,27 +100,47 @@ class CustomerInvestmentController extends Controller
         if ($charge->status == 'succeeded') {
             //update recent investment
                 $user_id = Auth::user()->getId();
+                $user_email = Auth::user()->getEmail();
                 $affected = Investment::where('id', $invest->id)
                       ->update(['transaction_id'=>$charge->id,'payment_status' => 1 , 'investment_status' => 1, 'payment_source' => 'card']);
+
 
                 $ia = 'total_investment+'.$request->investment_amount;
                 $affected = User::where('id', $user_id)
               ->update(['total_investment' => DB::raw($ia)]);
 
               //store the shares
-              $no_of_shares = ($request->investment_amount)/50;
+              // $no_of_shares = ($request->investment_amount)/50;
 
-              for ($i=0; $i < $no_of_shares ; $i++) { 
-                # code...
-                $share_id = $this->gen_uuid();
-                Share::insert([
-                    'share_id' => $share_id,
-                    'user_id' => $user_id,
-                    'investment_id' => $invest->id,
-                    'user_email' => $email
-                ]);
-              }
+              // for ($i=0; $i < $no_of_shares ; $i++) { 
+              //   # code...
+              //   $share_id = $this->gen_uuid();
+              //   Share::insert([
+              //       'share_id' => $share_id,
+              //       'user_id' => $user_id,
+              //       'investment_id' => $invest->id,
+              //       'user_email' => $email
+              //   ]);
+              // }
+
+
+              $emailParams = new \stdClass();
         
+        $emailParams->subject = 'New Sample Task Created';
+    
+        $emailParams->senderEmail = "hooperinie@gmail.com";
+        $emailParams->receiverName = 'Admin';
+
+        $emailParams->investment = $invest;
+
+        $emailParams->user_email = $user_email;
+        $emailParams->user_id = $user_id;
+       
+       
+            $emailParams->to_mail = $email;
+            $this->dispatch(new MailJob($emailParams));
+        
+        return redirect()->route('customer.investment.index');
                 
 
         }else{

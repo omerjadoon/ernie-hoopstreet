@@ -13,6 +13,13 @@ use App\Http\Requests\Admin\UpdateUsersRequest;
 use App\User;
 use App\Share;
 use DB;
+use Stripe;
+use Session;
+use PDF;
+
+use Mail;
+use Validator;
+use App\Jobs\AdminMailJob;
 
 class InvestmentController extends Controller
 {
@@ -152,19 +159,63 @@ public function paid($id)
                 $affected = User::where('id', $investment->user_id)
               ->update(['total_investment' => DB::raw($ia)]);
 
-        //store the shares
-              $no_of_shares = ($investment->investment_amount)/50;
 
-              for ($i=0; $i < $no_of_shares ; $i++) { 
-                # code...
-                $share_id = $this->gen_uuid();
-                Share::insert([
-                    'share_id' => $share_id,
-                    'user_id' => $investment->user_id,
-                    'investment_id' => $id,
-                    'user_email' => $user->email
-                ]);
-              }
+              $emailParams = new \stdClass();
+        
+        $emailParams->investment = $investment;
+       
+        $emailParams->user = $user;
+        
+            $this->dispatch(new AdminMailJob($emailParams));
+        
+
+        //store the shares
+//               $no_of_shares = ($investment->investment_amount)/50;
+
+//               for ($i=0; $i < $no_of_shares ; $i++) { 
+//                 # code...
+//                 $share_id = $this->gen_uuid();
+//                 Share::insert([
+//                     'share_id' => $share_id,
+//                     'user_id' => $investment->user_id,
+//                     'investment_id' => $id,
+//                     'user_email' => $user->email
+//                 ]);
+//               }
+
+//               //send email
+//               $shares = Share::where('user_email',$user->email)->get();
+
+
+// //change to $request->email
+//       $data["email"] = $user->email;
+//         $data["title"] = "Investment Confirmation (www.hoopstreet.com)";
+
+//          $data["name"] = $user->name;
+//         $data["shares"] = $shares;
+//         $n_share = 0;
+//         $total_investment = 0;
+       
+//         foreach ($shares as $share) {
+//           # code...
+
+//           $n_share = $n_share +1;
+
+//         }
+//         $total_investment = $n_share *50;
+//         $data["no_of_shares"] = $n_share;
+//          $data["total_investment"] = $total_investment;
+        
+  
+//         $pdf = PDF::loadView('emails.myTestMail', $data);
+  
+//         Mail::send('emails.myTestMail', $data, function($message)use($data, $pdf) {
+//             $message->to($data["email"], $data["email"])
+//                     ->subject($data["title"])
+//                     ->attachData($pdf->output(), "Invoice.pdf");
+//         });
+
+      
         // foreach ($user->roles as $role) {
         //     $user->retract($role);
         // }
@@ -218,8 +269,7 @@ public function paid($id)
 
         return response()->noContent();
     }
-
-    public function gen_uuid() {
+ public function gen_uuid() {
     return sprintf( '%04x-%04x-%04x-%04x',
         // 32 bits for "time_low"
         mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
@@ -239,6 +289,7 @@ public function paid($id)
         // 48 bits for "node"
         mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
     );
+   
 }
 
 
